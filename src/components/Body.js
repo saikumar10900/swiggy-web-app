@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import { RESTUARANTS_API } from "./utils/constants";
+import { Link } from "react-router";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -62,7 +63,9 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredSearchList.map((eachRes) => (
-          <RestaurantCard key={eachRes.info.id} resData={eachRes} />
+          <Link to={"/restaurants/" + eachRes.info.id} key={eachRes.info.id}>
+            <RestaurantCard resData={eachRes} />
+          </Link>
         ))}
       </div>
     </div>
