@@ -1,20 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
-import { RESTAURANT_MENU_API } from "./utils/constants";
+
+import useRestuarantMenu from "./utils/useRestuarantMenu";
+import ResturantCategory from "./ResturantCategory";
 
 const RestuarantMenu = () => {
   const { resId } = useParams();
-  const fetchRestaurantMenu = async () => {
-    const response = await fetch(RESTAURANT_MENU_API + resId);
-    const data = await response.json();
-    console.log(data);
-  };
+  const resInfo = useRestuarantMenu(resId);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    fetchRestaurantMenu();
-  }, []);
+  if (resInfo === null) return <h1> Loading....</h1>;
 
-  return <div>RestuarantMenu</div>;
+  const { name, costForTwoMessage } = resInfo?.cards[2]?.card?.card?.info;
+  const itemCategories =
+    resInfo.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (each) =>
+        each?.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
+  console.log("itemCategories: ", itemCategories);
+
+  return (
+    <div className="text-center mt-4">
+      <h1 className="font-bold text-2xl">{name}</h1>
+      <p className="font-bold text-lg">{costForTwoMessage}</p>
+
+      <div>
+        {itemCategories?.map((each, i) => (
+          <ResturantCategory
+            data={each}
+            key={i}
+            showItems={i === currentIndex}
+            setCurrentIndex={() => setCurrentIndex(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default RestuarantMenu;

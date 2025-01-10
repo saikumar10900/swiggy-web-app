@@ -18,7 +18,8 @@
   "homepage": "https://github.com/saikumar10900/swiggy-web-app#readme",
   "devDependencies": {
     "parcel": "^2.13.3",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
     "react": "^19.0.0",
