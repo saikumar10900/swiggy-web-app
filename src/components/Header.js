@@ -3,11 +3,15 @@ import { RES_LOGO } from "./utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "./utils/useOnlineStatus";
 import UserContext from "./utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { loggedUser, setUsername } = useContext(UserContext);
   const [loginStatus, setLoginStatus] = useState(true);
   const onlineStatus = useOnlineStatus();
+
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="w-full flex justify-between bg-gray-100 border border-black">
@@ -26,7 +30,9 @@ const Header = () => {
           <Link to="/contact">Contact Us</Link>
         </li>
         <li>
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart" className="font-bold text-xl">
+            Cart - ({cartItems.length} items)
+          </Link>
         </li>
         <li>
           <Link to="/grocery">Grocery</Link>
