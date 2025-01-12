@@ -5,27 +5,27 @@ import UserClass from "./UserClass";
 class About extends Component {
   constructor(props) {
     super(props);
-    console.log("Parent Constructor called");
+    // console.log("Parent Constructor called");
   }
 
   componentDidMount() {
-    console.log("Parent componentDidMount called");
+    // console.log("Parent componentDidMount called");
     this.timer = setInterval(() => {
-      console.log("hi");
+      // console.log("hi");
     }, 1000);
   }
 
   componentDidUpdate() {
-    console.log("Parent componentDidUpdate called");
+    // console.log("Parent componentDidUpdate called");
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
-    console.log("Parent componentWillUnmount called");
+    // console.log("Parent componentWillUnmount called");
   }
 
   render() {
-    console.log("Parent render called");
+    // console.log("Parent render called");
     return (
       <div>
         <h1>About</h1>
